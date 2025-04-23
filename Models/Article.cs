@@ -10,7 +10,8 @@ namespace WikiDafoos.Models
         public int Views { get; set; }
         public bool IsSuggested {  get; set; }
         public bool IsPrivate {  get; set; }
-
+        public List<Tag> Tags { get; set; } 
+        public Category Category { get; set; }  
         // public DateTime CreatedDate { get; set; }
     }
 }

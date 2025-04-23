@@ -4,7 +4,5 @@
     {
         public DateTime CreationTime { get; set; }
         public bool IsDeleted { get; set; }
-
-        
     }
 }
