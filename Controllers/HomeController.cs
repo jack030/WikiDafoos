@@ -29,13 +29,14 @@ public class HomeController : Controller
     //}
     public IActionResult About()
     {
+        ViewData["Title"] = "œ—»«—Â „«";
         return View();
     }
 
     public IActionResult Contact()
     {
         //ViewBag.Title = "Hello";
-        ViewData["Title"] = "Get in touch with us!";
+        ViewData["Title"] = " „«” »« „«";
 
         return View();
     }

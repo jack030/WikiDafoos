@@ -10,7 +10,6 @@
 
   <ItemGroup>
     <Content Remove="Views\Article\Index.cshtml" />
-    <Content Remove="Views\Home\About.cshtml" />
   </ItemGroup>
 <ItemGroup>
   <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="7.0.11" />
@@ -21,6 +20,5 @@
 </ItemGroup>
 <ItemGroup>
   <None Include="Views\Article\Index.cshtml" />
-  <None Include="Views\Home\About.cshtml" />
 </ItemGroup>
 </Project>
