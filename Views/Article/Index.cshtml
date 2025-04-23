@@ -1,0 +1,68 @@
+@model IEnumerable<WikiDafoos.Models.Article>
+
+@{
+    ViewData["Title"] = "Foosball Articles";
+}
+
+
+INDEX
+@* <div class="container">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1>Foosball Articles</h1>
+        <a asp-action="Create" class="btn btn-success">Create New</a>
+    </div>
+    
+    <div class="row mb-3">
+        <div class="col-md-6">
+            <form class="d-flex" role="search">
+                <input class="form-control me-2" type="search" placeholder="Search articles..." aria-label="Search">
+                <button class="btn btn-outline-success" type="submit">Search</button>
+            </form>
+        </div>
+        <div class="col-md-6">
+            <div class="dropdown float-end">
+                <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                    Sort By: Newest First
+                </button>
+                <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="#">Newest First</a></li>
+                    <li><a class="dropdown-item" href="#">Oldest First</a></li>
+                    <li><a class="dropdown-item" href="#">Most Viewed</a></li>
+                    <li><a class="dropdown-item" href="#">Alphabetical</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    
+    <div class="row row-cols-1 row-cols-md-2 g-4">
+        @foreach (var item in Model) {
+            <div class="col">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <h5 class="card-title">@Html.DisplayFor(modelItem => item.Title)</h5>
+                        <h6 class="card-subtitle mb-2 text-muted">@Html.DisplayFor(modelItem => item.CreatedDate)</h6>
+                        <p class="card-text">@(item.Content.Length > 150 ? item.Content.Substring(0, 150) + "..." : item.Content)</p>
+                        <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-primary">Read More</a>
+                    </div>
+                    <div class="card-footer">
+                        <small class="text-muted">Last updated 3 mins ago</small>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+    
+    <nav aria-label="Page navigation" class="mt-4">
+        <ul class="pagination justify-content-center">
+            <li class="page-item disabled">
+                <a class="page-link">Previous</a>
+            </li>
+            <li class="page-item active"><a class="page-link" href="#">1</a></li>
+            <li class="page-item"><a class="page-link" href="#">2</a></li>
+            <li class="page-item"><a class="page-link" href="#">3</a></li>
+            <li class="page-item">
+                <a class="page-link" href="#">Next</a>
+            </li>
+        </ul>
+    </nav>
+</div> *@

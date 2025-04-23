@@ -1,8 +1,78 @@
 ﻿@{
-    ViewData["Title"] = "WikiDafoos";
+    ViewData["Title"] = "Persian Foosball Community";
+   
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome to WikiDafoos</h1>
-    <p><a href="https://localhost:7019/">WikiDafoos</a>.</p>
+<div class="hero-section bg-light p-5 mb-4 rounded-3">
+    <div class="container-fluid py-5 text-center">
+        <h1 class="display-5 fw-bold">Welcome to WikiDafoos</h1>
+        <p class="fs-4">The premier resource for foosball (فوتبال دستی) in Iran</p>
+        <a class="btn btn-primary btn-lg" asp-controller="Home" asp-action="Index">Browse Articles</a>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-4">
+            <div class="card mb-4">
+                <div class="card-header bg-primary text-white">
+                    <h5>Latest Articles</h5>
+                </div>
+                <div class="card-body">
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item"><a href="#">How to Improve Your Defense</a></li>
+                        <li class="list-group-item"><a href="#">2023 Tournament Results</a></li>
+                        <li class="list-group-item"><a href="#">Maintaining Your Table</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card mb-4">
+                <div class="card-header bg-success text-white">
+                    <h5>Popular Topics</h5>
+                </div>
+                <div class="card-body">
+                    <div class="d-flex flex-wrap gap-2">
+                        <span class="badge bg-secondary">Techniques</span>
+                        <span class="badge bg-secondary">Tournaments</span>
+                        <span class="badge bg-secondary">Equipment</span>
+                        <span class="badge bg-secondary">Rules</span>
+                        <span class="badge bg-secondary">History</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card mb-4">
+                <div class="card-header bg-info text-white">
+                    <h5>Quick Stats</h5>
+                </div>
+                <div class="card-body">
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">Articles: 127</li>
+                        <li class="list-group-item">Active Users: 342</li>
+                        <li class="list-group-item">Tournaments: 15</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mt-4">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h4>Featured Article</h4>
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">The History of Foosball in Iran</h5>
+                    <p class="card-text">Foosball was introduced to Iran in the 1970s and quickly gained popularity among university students. The game became particularly popular in Tehran, where the first official tournaments were held in the early 1990s...</p>
+                    <a href="#" class="btn btn-outline-primary">Read More</a>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

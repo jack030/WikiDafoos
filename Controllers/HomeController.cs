@@ -23,17 +23,20 @@ public class HomeController : Controller
         return View();
     }
 
-    public IActionResult Articles()
-    {
-        return View();
-    }
+    //public IActionResult Articles()
+    //{
+    //    return View();
+    //}
     public IActionResult About()
     {
         return View();
     }
 
-    public IActionResult ContactUs()
+    public IActionResult Contact()
     {
+        //ViewBag.Title = "Hello";
+        ViewData["Title"] = "Get in touch with us!";
+
         return View();
     }
 
