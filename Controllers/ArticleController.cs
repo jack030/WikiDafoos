@@ -15,8 +15,31 @@ namespace WikiDafoos.Controllers
 
         public async Task<IActionResult> Index()
         {
-            var articles = await _dafoosDbContext.Articles.Include(a => a.Category).ToListAsync();
-            return View(articles);
+            var model = await _dafoosDbContext.Articles.Include(a => a.Category).ToListAsync();
+            if (model.Count == 0)
+            {
+                model = new List<Article>
+                {
+                    new Article
+                    {
+                        Content = "",
+                        CreationTime = DateTime.Now,
+                        Id = 22,
+                        Title = "Hello",
+                        Category = null,
+                        IsPrivate = false,
+                        Tags = new List<Tag>(),
+                        IsDeleted = false,
+                        Views = 0,
+                        IsSuggested = false
+                                                    
+                        
+                        
+                    }
+                };
+
+            }
+            return View(model);
         }
         public IActionResult Create()
         {
