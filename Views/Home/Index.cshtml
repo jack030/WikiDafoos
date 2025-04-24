@@ -3,7 +3,7 @@
    
 }
 
-<div class="hero-section bg-light p-5 mb-4 rounded-3">
+<div class="hero-section landing-page bg-light p-5 mb-4 rounded-3">
     <div class="container-fluid py-5 text-center">
        
           <!-- Optimized Responsive Image -->
@@ -15,22 +15,24 @@
         <p class="fs-4">به ویکی دافوس خوش آمدید</p>
        
     </div>
-    <div class="order-lg-2 mx-lg-2 flex-grow-1 flex-lg-grow-0">
-        <form class="d-flex" asp-controller="Search" asp-action="Index" method="get">
-            <div class="input-group">
-                <input type="text"
-                       class="form-control"
-                       placeholder="جستجو..."
-                       aria-label="Search"
-                       name="query"
-                       dir="rtl">
-                <button class="btn btn-light" type="submit">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
-                        <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
-                    </svg>
-                </button>
-            </div>
-        </form>
+    <div class="row justify-content-center">
+        <div class="col-12 col-lg-4">
+            <form class="d-flex" asp-controller="Search" asp-action="Search" method="get">
+                <div class="input-group">
+                    <input type="text"
+                           class="form-control index-search-input"
+                           placeholder="جستجو..."
+                           aria-label="Search"
+                           name="query"
+                           dir="rtl">
+                    <button class="btn  fw-bold search-btn" type="submit">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="white" viewBox="0 0 14 14">
+                            <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
+                        </svg>
+                    </button>
+                </div>
+            </form>
+        </div>
     </div>
 
 </div>
@@ -40,7 +42,7 @@
         <div class="col-md-4">
             <div class="card mb-4">
                 <div class="card-header bg-primary text-white">
-                    <h5>Latest Articles</h5>
+                    <h5>آخرین مقالات</h5>
                 </div>
                 <div class="card-body">
                     <ul class="list-group list-group-flush">
@@ -55,7 +57,7 @@
         <div class="col-md-4">
             <div class="card mb-4">
                 <div class="card-header bg-success text-white">
-                    <h5>Popular Topics</h5>
+                    <h5>پر بازدیدترین‌ها</h5>
                 </div>
                 <div class="card-body">
                     <div class="d-flex flex-wrap gap-2">
@@ -72,7 +74,7 @@
         <div class="col-md-4">
             <div class="card mb-4">
                 <div class="card-header bg-info text-white">
-                    <h5>Quick Stats</h5>
+                    <h5>مقالات برگزیده</h5>
                 </div>
                 <div class="card-body">
                     <ul class="list-group list-group-flush">

@@ -21,8 +21,39 @@ html {
         font-size: 16px;
     }
 }
+.hero-section.landing-page{
+    padding-top:0px!important;
+    margin-top:0px!important;
+}
+.search-btn {
+    background-color: seagreen;
+    direction: rtl;
+}
 
-body.layout-container  a.nav-link{
+.form-control.index-search-input {
+    border-top-left-radius: unset;
+    border-bottom-left-radius: unset;
+    border-top-right-radius: 30px !important;
+    border-bottom-right-radius: 30px !important;
+    margin-left: 0;
+}
+
+input .form-control{
+    margin-left:0;
+    border-left:0px;
+}
+button.search-btn {
+    background-color: seagreen !important;
+    direction: rtl;
+    border-top-right-radius: unset;
+    border-bottom-right-radius: unset;
+    border-top-left-radius: 30px !important;
+    border-bottom-left-radius: 30px !important;
+    margin-right: 0;
+    padding:20px;
+}
+
+body.layout-container a.nav-link {
     font-family: 'Vazir', 'Arial', sans-serif;
 }
 
@@ -40,9 +71,11 @@ body {
     background-color: #f8f9fa;
     font-family: 'Vazir', 'Arial', sans-serif;
 }
+
 .main {
     font-family: 'Vazir', 'Arial', sans-serif;
 }
+
 img {
     opacity: 1;
     transition: opacity 0.3s ease;
