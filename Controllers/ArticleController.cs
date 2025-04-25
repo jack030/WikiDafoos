@@ -98,5 +98,20 @@ namespace WikiDafoos.Controllers
             if (article == null) return NotFound();
             return View(article);
         }
+
+        [HttpGet]
+        public async Task<IActionResult> SearchArticles(string query)
+        {
+            if (string.IsNullOrWhiteSpace(query))
+                return Json(new List<object>());
+
+            var results = await _dafoosDbContext.Articles
+                .Where(a => a.Title.Contains(query) || a.Content.Contains(query))
+                .Select(a => new { a.Id, a.Title })
+                .Take(10)
+                .ToListAsync();
+
+            return Json(results);
+        }
     }
 }
