@@ -29,19 +29,13 @@
                     </button>
                 </div>
             </form>
-          @*    <div class="container-fluid py-5 text-center">
 
-                 <!-- Optimized Responsive Image -->
-                 <p class="fs-4">بازدید مقالات</p>
-                 @* TODO :// COLOR *@
-
-             @* </div> *@ 
             <ul id="searchResults" class="list-group position-absolute w-100 z-3 mt-1 d-none"></ul>
-            
+
         </div>
-        
+
     </div>
-   
+
 
 
 </div>
@@ -56,6 +50,7 @@
     <div class="read-more">
 
         <div>
+
             <img src="images/readmore.png"></img>
         </div>
     </div>
@@ -63,7 +58,14 @@
     <div class="read-more-mouse">
 
         <div>
-            <img src="images/mouse.png"></img>
+            <div class="text-center">
+
+                <!-- Optimized Responsive Image -->
+                @* <p >بازدید مقالات</p> *@
+                @* TODO :// COLOR *@
+
+                <img src="images/mouse.png"></img>
+            </div>
         </div>
     </div>
 
@@ -200,14 +202,14 @@
                 const li = document.createElement('li');
                 li.className = 'list-group-item list-group-item-action';
                 li.innerHTML = `
-                            <a href="/Article/Details/${article.Id}" class="text-decoration-none d-flex align-items-center w-100">
-                                ${article.Image
+                                <a href="/Article/Details/${article.Id}" class="text-decoration-none d-flex align-items-center w-100">
+                                    ${article.Image
                         ? `<img src="${article.Image}" alt="${article.Title}" class="me-2 rounded" style="width: 40px; height: 40px; object-fit: cover;">`
                         : `<div class="me-2 rounded bg-secondary" style="width: 40px; height: 40px;"></div>`
                     }
-                                <span>${article.Title}</span>
-                            </a>
-                        `;
+                                    <span>${article.Title}</span>
+                                </a>
+                            `;
                 resultsList.appendChild(li);
             });
             resultsList.classList.remove('d-none');
