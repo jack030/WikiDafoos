@@ -20,15 +20,15 @@ public class HomeController : Controller
     {
         var mostViewedArticles = await _dafoosDbContext.Articles.Include(x => x.Category)
             .OrderByDescending(x => x.Views)
-            .Take(10)
+            .Take(6)
             .ToListAsync();
         var latestArticles = await _dafoosDbContext.Articles.Include(x => x.Category)
            .OrderByDescending(x => x.CreationTime)
-           .Take(10)
+           .Take(6)
            .ToListAsync();
         var suggestedArticles = await _dafoosDbContext.Articles.Include(x => x.Category).Where(x => x.IsSuggested == true)
             .OrderByDescending(x => x.CreationTime)
-            .Take(10)
+            .Take(6)
             .ToListAsync();
         var viewModel = new HomeIndexViewModel
         {

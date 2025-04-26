@@ -179,7 +179,7 @@ namespace WikiDafoos.Controllers
 
             var results = await _dafoosDbContext.Articles
                 .Where(a => a.Title.Contains(query) || a.Content.Contains(query))
-                .Select(a => new { a.Id, a.Title })
+                .Select(a => new { a.Id, a.Title ,a.IsPrivate,a.Image})
                 .Take(10)
                 .ToListAsync();
 
