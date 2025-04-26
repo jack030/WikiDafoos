@@ -1,16 +1,20 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using WikiDafoos.Models;
+using WikiDafoos.Models.ViewModel;
 
+using AutoMapper;
 namespace WikiDafoos.Controllers
 {
     public class ArticleController : Controller
     {
         private readonly DafoosDbContext _dafoosDbContext;
+        private readonly IMapper _mapper;
 
-        public ArticleController(DafoosDbContext dafoosDbContext)
+        public ArticleController(DafoosDbContext dafoosDbContext, IMapper mapper)
         {
             _dafoosDbContext = dafoosDbContext;
+            _mapper = mapper;
         }
 
         public async Task<IActionResult> Index()
@@ -32,9 +36,9 @@ namespace WikiDafoos.Controllers
                         IsDeleted = false,
                         Views = 0,
                         IsSuggested = false
-                                                    
-                        
-                        
+
+
+
                     }
                 };
 
@@ -47,22 +51,31 @@ namespace WikiDafoos.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create(Article article,string TagsInput)
+        public async Task<IActionResult> Create(CreateArticleViewModel creadteModel)
         {
-            ViewBag.Categories = await _dafoosDbContext.Categories.ToListAsync();
             if (ModelState.IsValid)
             {
-                if (!string.IsNullOrWhiteSpace(TagsInput))
+                var article = _mapper.Map<Article>(creadteModel);
+
+                if (!string.IsNullOrEmpty(creadteModel.TagsInput))
                 {
-                    article.Tags = TagsInput.Split(',')
-                                             .Select(tagName => new Tag { Name = tagName.Trim() })
-                                             .ToList();
+                    article.Tags = creadteModel.TagsInput
+                        .Split(',')
+                        .Select(tag => new Tag { Name = tag.Trim() })
+                        .ToList();
                 }
+
+                if (creadteModel.CategoryId.HasValue)
+                {
+                    article.Category = await _dafoosDbContext.Categories.FindAsync(creadteModel.CategoryId.Value);
+                }
+
                 _dafoosDbContext.Articles.Add(article);
                 await _dafoosDbContext.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(article);
+            ViewBag.Categories = await _dafoosDbContext.Categories.ToListAsync();
+            return View(creadteModel);
         }
 
         public async Task<IActionResult> Edit(int id)

@@ -2,7 +2,7 @@
 
 namespace WikiDafoos.Models.ViewModel
 {
-    public class ArticleCreateViewModel
+    public class CreateArticleViewModel
     {
         [Required]
         public string Title { get; set; }
