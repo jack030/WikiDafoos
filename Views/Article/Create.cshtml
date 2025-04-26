@@ -3,6 +3,28 @@
 @{
     var categories = ViewBag.Categories as List<WikiDafoos.Models.Category>;
 }
+@section Scripts {
+    <script src="https://cdn.ckeditor.com/ckeditor5/41.0.0/classic/ckeditor.js"></script>
+    <script>
+        ClassicEditor
+            .create(document.querySelector('#Content'), {
+                toolbar: [
+                    'heading', '|', 'bold', 'italic', 'link', 'bulletedList', 'numberedList', '|',
+                    'imageUpload', 'blockQuote', 'insertTable', 'mediaEmbed', 'undo', 'redo'
+                ],
+                ckfinder: {
+                    uploadUrl: '/Article/UploadImage',
+                    headers: {
+                        'X-CSRF-TOKEN': document.querySelector('input[name="__RequestVerificationToken"]').value // Include CSRF token if needed
+                    }
+                }
+            })
+            .then(editor => console.log('Editor initialized'))
+            .catch(error => console.error('Editor initialization error:', error));
+    </script>
+}
+
+
 
 <div class="container">
     <form asp-controller="Article" asp-action="Create" method="post">

@@ -10,11 +10,13 @@ namespace WikiDafoos.Controllers
     {
         private readonly DafoosDbContext _dafoosDbContext;
         private readonly IMapper _mapper;
+        private readonly IWebHostEnvironment _environment;
 
-        public ArticleController(DafoosDbContext dafoosDbContext, IMapper mapper)
+        public ArticleController(DafoosDbContext dafoosDbContext, IMapper mapper, IWebHostEnvironment environment)
         {
             _dafoosDbContext = dafoosDbContext;
             _mapper = mapper;
+            _environment = environment;
         }
 
         public async Task<IActionResult> Index()
@@ -45,7 +47,52 @@ namespace WikiDafoos.Controllers
             }
             return View(model);
         }
-      
+
+
+        [HttpPost]
+        public async Task<IActionResult> UploadImage(IFormFile upload)
+        {
+            Response.Headers.Add("Access-Control-Allow-Origin", "*");
+            if (upload == null || upload.Length == 0)
+            {
+                return Json(new { error = new { message = "No file uploaded." } });
+            }
+
+            try
+            {
+                // Define the path to store images
+                var uploadsFolder = Path.Combine(_environment.WebRootPath, "Uploads");
+                if (!Directory.Exists(uploadsFolder))
+                {
+                    Directory.CreateDirectory(uploadsFolder);
+                }
+
+                // Generate a unique file name
+                var fileName = Guid.NewGuid().ToString() + Path.GetExtension(upload.FileName);
+                var filePath = Path.Combine(uploadsFolder, fileName);
+
+                // Save the file
+                using (var stream = new FileStream(filePath, FileMode.Create))
+                {
+                    await upload.CopyToAsync(stream);
+                }
+
+                // Return the URL of the uploaded image
+                var fileUrl = $"{Request.Scheme}://{Request.Host}/Uploads/{fileName}";
+                var result = new JsonResult(new { url = fileUrl, uploaded = true })
+                {
+                    StatusCode = 200,
+                    ContentType = "application/json"
+                };
+                return result;
+            }
+            catch (Exception ex)
+            {
+                // Log the error for debugging
+                Console.WriteLine($"Upload error: {ex.Message}");
+                return Json(new { error = new { message = $"Server error: {ex.Message}" } });
+            }
+        }
         public async Task<IActionResult> Create()
         {
 
@@ -117,7 +164,7 @@ namespace WikiDafoos.Controllers
 
         public async Task<IActionResult> Details(int id)
         {
-            var article = await _dafoosDbContext.Articles.Include(a => a.Category).FirstOrDefaultAsync(a => a.Id == id);
+            var article = await _dafoosDbContext.Articles.Include(a => a.Category).Include(x=>x.Tags).FirstOrDefaultAsync(a => a.Id == id);
             if (article == null) return NotFound();
             return View(article);
         }

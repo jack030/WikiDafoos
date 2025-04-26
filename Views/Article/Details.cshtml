@@ -10,65 +10,34 @@
             <article>
                 <header class="mb-4">
                     <h1 class="fw-bolder mb-1">@Model.Title</h1>
-                    <div class="text-muted fst-italic mb-2">Posted on @Model.CreationTime.ToString("MMMM dd, yyyy") by Author Name</div>
+                    <div class="text-muted fst-italic mb-2">پست شده در تاریخ <br />@Model.CreationTime.ToString("MMMM dd, yyyy") </div>
                     <div class="d-flex gap-2 mb-3">
-                        <span class="badge bg-secondary">Techniques</span>
-                        <span class="badge bg-secondary">Beginner</span>
+                        @foreach(var t in Model.Tags)
+                        {
+                            
+                        <span class="badge bg-secondary">@t?.Name</span>
+                       
+                        }
                     </div>
                 </header>
 
                 <figure class="mb-4">
-                    <img class="img-fluid rounded" src="https://via.placeholder.com/900x400" alt="Article image">
+                    <img class="img-fluid rounded" src="@Model.Image" alt="Article image">
                 </figure>
 
                 <section class="mb-5">
-                    <p class="fs-5 mb-4">@Model.Content</p>
-
-                    <h2 class="fw-bolder mb-4 mt-5">Basic Rules</h2>
-                    <p class="fs-5 mb-4">The game is played with two teams of two players each. Each team controls four rows of foos men:</p>
-                    <ul class="fs-5 mb-4">
-                        <li>Row 1 - Goalie (1 foos man)</li>
-                        <li>Row 2 - Defense (2 foos men)</li>
-                        <li>Row 3 - Midfield (3 foos men)</li>
-                        <li>Row 4 - Attack (2 foos men)</li>
-                    </ul>
-
-                    <h2 class="fw-bolder mb-4 mt-5">Advanced Techniques</h2>
-                    <p class="fs-5 mb-4">Mastering these techniques will give you an edge in competitive play:</p>
-                    <div class="card bg-light mb-4">
-                        <div class="card-body">
-                            <h5 class="card-title">The Snake Shot</h5>
-                            <p class="card-text">Wrap your fingers around the handle and use a quick wrist motion to generate power.</p>
+                    <p class="fs-5 mb-4">
+                        <div>
+                            @Html.Raw(Model.Content)
                         </div>
-                    </div>
+                    </p>
+
+                    
+                   
                 </section>
             </article>
 
-            <section class="mb-5">
-                <div class="card bg-light">
-                    <div class="card-body">
-                        <h4 class="fw-bolder mb-4">Comments</h4>
-
-                        <div class="d-flex mb-4">
-                            <div class="flex-shrink-0">
-                                <img class="rounded-circle" src="https://via.placeholder.com/50" alt="User image">
-                            </div>
-                            <div class="ms-3">
-                                <div class="fw-bold">Commenter Name</div>
-                                <div class="text-muted small">January 1, 2023</div>
-                                Great article! Very helpful for beginners.
-                            </div>
-                        </div>
-
-                        <form class="mb-4">
-                            <div class="form-group">
-                                <textarea class="form-control" rows="3" placeholder="Join the discussion..."></textarea>
-                            </div>
-                            <button type="submit" class="btn btn-primary mt-2">Post Comment</button>
-                        </form>
-                    </div>
-                </div>
-            </section>
+            
         </div>
 
         <div class="col-lg-4">
