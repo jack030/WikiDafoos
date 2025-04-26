@@ -162,12 +162,12 @@ img {
 .navbar-toggler {
     border: none;
     margin-right: 1rem; /* Space from left edge */
-    background-color: white!important;
-    border-radius: 50px!important;
-    height:60px!important;
-    width:60px!important;
-    margin-top: 20px!important;
-    margin-left:20px!important;
+    background-color: white !important;
+    border-radius: 50px !important;
+    height: 60px !important;
+    width: 60px !important;
+    margin-top: 20px !important;
+    margin-left: 20px !important;
     color: white;
 }
 
@@ -189,6 +189,7 @@ a.btn.btn-outline-secondary.auth {
     /*padding:20px;*/
     padding-right: 20px !important;
     padding-left: 20px !important;
+    width: 150px;
     /*padding-top:4px!important;*/
     border-radius: 25px;
     justify-content: normal;
@@ -248,7 +249,6 @@ a.btn.btn-outline-secondary.auth {
     .auth-buttons {
         text-align: center;
         margin: 10px 0;
-        padding-right: 1rem; /* Space from left in collapsed menu */
     }
 
         .auth-buttons .btn {
@@ -257,6 +257,14 @@ a.btn.btn-outline-secondary.auth {
             line-height: 50px;
             font-size: 0.9rem;
         }
+
+    .read-more {
+        display: none;
+    }
+
+    .read-more-mouse {
+        transform: translate(-50%, -200%);
+    }
 
     .navbar-brand {
         margin-left: 0;
@@ -272,6 +280,10 @@ a.btn.btn-outline-secondary.auth {
         }
 
 
+    #navbarNav {
+        margin-left: 0px;
+    }
+
 
     .auth-buttons {
         text-align: center;
@@ -281,11 +293,25 @@ a.btn.btn-outline-secondary.auth {
     a .navbar-brand img {
         display: none !important;
     }
-    .img-brand{
-        display:none!important;
+
+    .img-brand {
+        display: none !important;
+    }
+
+    .hero-section.landing-page {
+        padding-top: 0px !important;
+        margin-top: 0px !important;
+        margin-bottom: 0px !important;
+        height: 100svh;
+        background-color: rgb(244 244 244) !important;
     }
 }
 
+@media (max-width: 376px) {
+    .read-more-mouse {
+        display: none;
+    }
+}
 
 
 
