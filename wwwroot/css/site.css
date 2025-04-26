@@ -224,7 +224,7 @@ a.btn.btn-outline-secondary.auth {
     .read-more-mouse img {
         width: 80px;
 
-        animation: mouseJump 2000ms ease forwards infinite;
+        animation: mouseJump 2000ms ease alternate infinite;
     }
 .articles {
     position: relative;

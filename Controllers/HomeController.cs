@@ -1,21 +1,42 @@
 using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using WikiDafoos.Models;
+using WikiDafoos.Models.ViewModel;
 
 namespace WikiDafoos.Controllers;
 
 public class HomeController : Controller
 {
     private readonly ILogger<HomeController> _logger;
-
-    public HomeController(ILogger<HomeController> logger)
+    private readonly DafoosDbContext _dafoosDbContext;
+    public HomeController(ILogger<HomeController> logger, DafoosDbContext dafoosDbContext)
     {
         _logger = logger;
+        _dafoosDbContext = dafoosDbContext;
     }
 
-    public IActionResult Index()
+    public async Task<IActionResult> Index()
     {
-        return View();
+        var mostViewedArticles = await _dafoosDbContext.Articles.Include(x => x.Category)
+            .OrderByDescending(x => x.Views)
+            .Take(10)
+            .ToListAsync();
+        var latestArticles = await _dafoosDbContext.Articles.Include(x => x.Category)
+           .OrderByDescending(x => x.CreationTime)
+           .Take(10)
+           .ToListAsync();
+        var suggestedArticles = await _dafoosDbContext.Articles.Include(x => x.Category).Where(x => x.IsSuggested == true)
+            .OrderByDescending(x => x.CreationTime)
+            .Take(10)
+            .ToListAsync();
+        var viewModel = new HomeIndexViewModel
+        {
+            LatestArticles = latestArticles,
+            SuggestedArticles = suggestedArticles,
+            TopViewArticles = mostViewedArticles
+        };
+        return View(viewModel);
     }
 
     public IActionResult Dashboard()
