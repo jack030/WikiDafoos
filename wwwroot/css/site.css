@@ -26,7 +26,7 @@ html {
     padding-top: 0px !important;
     margin-top: 0px !important;
     margin-bottom: 0px !important;
-    height: 78svh;
+    height: 75svh;
     background-color: rgb(244 244 244) !important;
 }
 
@@ -50,7 +50,10 @@ html {
         background-color: #f8f9fa;
     }
 
-
+header .navbar {
+    background-color: rgb(244 244 244) !important;
+    
+}
 
 
 .form-control.index-search-input {
