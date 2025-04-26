@@ -47,10 +47,17 @@ namespace WikiDafoos.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create(Article article)
+        public async Task<IActionResult> Create(Article article,string TagsInput)
         {
+            ViewBag.Categories = await _dafoosDbContext.Categories.ToListAsync();
             if (ModelState.IsValid)
             {
+                if (!string.IsNullOrWhiteSpace(TagsInput))
+                {
+                    article.Tags = TagsInput.Split(',')
+                                             .Select(tagName => new Tag { Name = tagName.Trim() })
+                                             .ToList();
+                }
                 _dafoosDbContext.Articles.Add(article);
                 await _dafoosDbContext.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
