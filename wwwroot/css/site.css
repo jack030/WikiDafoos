@@ -236,6 +236,10 @@ a.btn.btn-outline-secondary.auth {
     padding-top: 80px;
 }
 
+@media (max-width: 1025px) {
+}
+
+
 @media (max-width: 991.98px) {
     .navbar-nav {
         text-align: center;
