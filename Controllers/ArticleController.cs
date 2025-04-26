@@ -45,11 +45,14 @@ namespace WikiDafoos.Controllers
             }
             return View(model);
         }
-        public IActionResult Create()
+      
+        public async Task<IActionResult> Create()
         {
-            return View();
-        }
 
+            ViewBag.Categories = await _dafoosDbContext.Categories.ToListAsync();
+            var model = new CreateArticleViewModel();
+            return View(model);
+        }
         [HttpPost]
         public async Task<IActionResult> Create(CreateArticleViewModel creadteModel)
         {

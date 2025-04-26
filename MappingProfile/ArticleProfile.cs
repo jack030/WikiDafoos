@@ -9,8 +9,9 @@ namespace WikiDafoos.MappingProfile
         public ArticleProfile() 
         {
             CreateMap<CreateArticleViewModel, Article>()
-                .ForMember(dest => dest.Tags, opt => opt.Ignore()) // Manual tags mapping later
-                .ForMember(dest => dest.Category, opt => opt.Ignore()); // We'll assign category separately
+                .ForMember(dest => dest.Tags, opt => opt.Ignore())
+                .ForMember(dest => dest.Category, opt => opt.Ignore())
+                .ForMember(dest => dest.CreationTime, src => src.MapFrom( y=>DateTime.UtcNow)); 
         }
     }
 }
