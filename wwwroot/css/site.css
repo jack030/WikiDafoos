@@ -27,7 +27,10 @@ html {
     margin-top: 0px !important;
     margin-bottom: 0px !important;
     height: 78svh;
+    background-color: rgb(244 244 244) !important;
 }
+
+
 
 .search-btn {
     background-color: seagreen;
@@ -87,6 +90,9 @@ html {
     min-height: 100%;
 }
 
+    html * {
+        font-family: 'Vazir', 'Arial', sans-serif;
+    }
 body {
     margin-bottom: 60px;
     background-color: #f8f9fa;
@@ -223,9 +229,9 @@ a.btn.btn-outline-secondary.auth {
 
     .read-more-mouse img {
         width: 80px;
-
         animation: mouseJump 2000ms ease alternate infinite;
     }
+
 .articles {
     position: relative;
     padding-top: 80px;

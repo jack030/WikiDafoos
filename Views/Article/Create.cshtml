@@ -3,26 +3,6 @@
 @{
     var categories = ViewBag.Categories as List<WikiDafoos.Models.Category>;
 }
-@section Scripts {
-    <script src="https://cdn.ckeditor.com/ckeditor5/41.0.0/classic/ckeditor.js"></script>
-    <script>
-        ClassicEditor
-            .create(document.querySelector('#Content'), {
-                toolbar: [
-                    'heading', '|', 'bold', 'italic', 'link', 'bulletedList', 'numberedList', '|',
-                    'imageUpload', 'blockQuote', 'insertTable', 'mediaEmbed', 'undo', 'redo'
-                ],
-                ckfinder: {
-                    uploadUrl: '/Article/UploadImage',
-                    headers: {
-                        'X-CSRF-TOKEN': document.querySelector('input[name="__RequestVerificationToken"]').value // Include CSRF token if needed
-                    }
-                }
-            })
-            .then(editor => console.log('Editor initialized'))
-            .catch(error => console.error('Editor initialization error:', error));
-    </script>
-}
 
 
 
@@ -41,8 +21,9 @@
         </div>
 
         <div class="mb-3">
-            <label asp-for="Image" class="form-label"></label>
-            <input asp-for="Image" class="form-control" />
+            <label asp-for="Image" class="form-label">Upload Image</label>
+            <input class="form-control" type="file" accept="image/*" id="articleImage" />
+            <input style="display: none" asp-for="Image" class="form-control" id="imageUrl" />
             <span asp-validation-for="Image" class="text-danger"></span>
         </div>
 
@@ -71,3 +52,42 @@
         <button type="submit" class="btn btn-success mt-3">Save</button>
     </form>
 </div>
+
+
+@section Scripts {
+    <script src="https://cdn.ckeditor.com/ckeditor5/41.0.0/classic/ckeditor.js"></script>
+    <script>
+        ClassicEditor
+            .create(document.querySelector('#Content'), {
+                toolbar: [
+                    'heading', '|', 'bold', 'italic', 'link', 'bulletedList', 'numberedList', '|',
+                    'imageUpload', 'blockQuote', 'insertTable', 'mediaEmbed', 'undo', 'redo'
+                ],
+                ckfinder: {
+                    uploadUrl: '/Article/UploadImage',
+                    headers: {
+                        'X-CSRF-TOKEN': document.querySelector('input[name="__RequestVerificationToken"]').value // Include CSRF token if needed
+                    }
+                }
+            })
+            .then(editor => console.log('Editor initialized'))
+            .catch(error => console.error('Editor initialization error:', error));
+    </script>
+    <script>
+        document.getElementById('articleImage').addEventListener('change', function (e) {
+            var formData = new FormData();
+            formData.append('upload', e.target.files[0]);
+
+            fetch('/Article/UploadImage', {
+                method: 'POST',
+                body: formData
+            })
+                .then(response => response.json())
+                .then(data => {
+                    // Set the image URL in a hidden field or wherever you need it
+                    document.getElementById('imageUrl').value = data.url;
+                })
+                .catch(error => console.error('Error:', error));
+        });
+    </script>
+}

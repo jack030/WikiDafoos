@@ -78,7 +78,9 @@ namespace WikiDafoos.Controllers
                 }
 
                 // Return the URL of the uploaded image
-                var fileUrl = $"{Request.Scheme}://{Request.Host}/Uploads/{fileName}";
+                //var fileUrl = $"{Request.Scheme}://{Request.Host}/Uploads/{fileName}";
+                var fileUrl = $"/Uploads/{fileName}";
+
                 var result = new JsonResult(new { url = fileUrl, uploaded = true })
                 {
                     StatusCode = 200,
