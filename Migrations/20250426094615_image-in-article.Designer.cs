@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WikiDafoos;
 
@@ -11,9 +12,11 @@ using WikiDafoos;
 namespace WikiDafoos.Migrations
 {
     [DbContext(typeof(DafoosDbContext))]
-    partial class DafoosDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250426094615_image-in-article")]
+    partial class imageinarticle
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

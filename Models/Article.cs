@@ -12,6 +12,7 @@ namespace WikiDafoos.Models
         public bool IsPrivate {  get; set; }
         public List<Tag> Tags { get; set; } 
         public Category Category { get; set; }  
+        public string Image {  get; set; }
         // public DateTime CreatedDate { get; set; }
     }
 }

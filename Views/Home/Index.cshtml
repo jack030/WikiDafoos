@@ -33,7 +33,7 @@
         </div>
     </div>
 
-  
+
 </div>
 
 
@@ -65,13 +65,13 @@
                 </div>
                 <div class="card-body">
                     <ul class="list-group list-group-flush">
-                        @foreach(var t in Model.LatestArticles)
+                        @foreach (var t in Model.LatestArticles)
                         {
                             <li class="list-group-item"><a href="/Article/Details/${@t.Id}">@t.Title</a></li>
                         }
 
-                        
-                       @*  <li class="list-group-item"><a href="#">ARticle 2</a></li>
+
+                        @*  <li class="list-group-item"><a href="#">ARticle 2</a></li>
                         <li class="list-group-item"><a href="#">Article 3</a></li> *@
                     </ul>
                 </div>
@@ -84,12 +84,16 @@
                     <h5>پر بازدیدترین‌ها</h5>
                 </div>
                 <div class="card-body">
-                    <div class="d-flex flex-wrap gap-2">
+                    <ul class="list-group list-group-flush">
                         @foreach (var t in Model.TopViewArticles)
                         {
                             <li class="list-group-item"><a href="/Article/Details/${@t.Id}">@t.Title</a></li>
                         }
-                    </div>
+
+
+                        @*  <li class="list-group-item"><a href="#">ARticle 2</a></li>
+                        <li class="list-group-item"><a href="#">Article 3</a></li> *@
+                    </ul>
                 </div>
             </div>
         </div>

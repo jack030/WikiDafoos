@@ -1,0 +1,29 @@
+﻿@page
+@model WikiDafoos.Models.Article
+@{
+
+    <form asp-action="" method="post">
+        <div class="mb-3">
+            <label asp-for="Title" class="form-label"></label>
+            <input asp-for="Title" class="form-control" />
+        </div>
+        <div class="mb-3">
+            <label asp-for="Content" class="form-label"></label>
+            <textarea asp-for="Content" class="form-control"></textarea>
+        </div>
+        <div class="mb-3">
+            <label asp-for="Views" class="form-label"></label>
+            <input asp-for="Views" type="number" class="form-control" />
+        </div>
+        <div class="form-check">
+            <input asp-for="IsPrivate" class="form-check-input" />
+            <label asp-for="IsPrivate" class="form-check-label"></label>
+        </div>
+        <div class="form-check">
+            <input asp-for="IsSuggested" class="form-check-input" />
+            <label asp-for="IsSuggested" class="form-check-label"></label>
+        </div>
+
+        <button type="submit" class="btn btn-success mt-3">Save</button>
+    </form>
+}
