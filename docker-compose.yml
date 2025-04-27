@@ -8,7 +8,7 @@ services:
       - "8080:80"
     environment:
       - ASPNETCORE_ENVIRONMENT=Production
-      - ConnectionStrings__DefaultConnection=Server=db;Database=YourDatabaseName;User Id=sa;Password=YourStrong@Passw0rd;TrustServerCertificate=True;
+      - ConnectionStrings__DefaultConnection=Server=db;Database=WikiDafoos;User Id=sa;Password=!1Hajihaji;TrustServerCertificate=True;
     depends_on:
       - db
     networks:
@@ -18,7 +18,7 @@ services:
     image: mcr.microsoft.com/mssql/server:2019-latest
     environment:
       - ACCEPT_EULA=Y
-      - SA_PASSWORD=YourStrong@Passw0rd
+      - SA_PASSWORD=!1Hajihaji
       - MSSQL_PID=Express
     ports:
       - "1433:1433"
