@@ -5,78 +5,103 @@
 }
 
 <div class="container">
+
+
     <div class="row">
-        <div class="col-lg-8">
+        <div class="col-lg-3">
+
+
+            <div class="card">
+                <div class="card-header">فهرست</div>
+                <div class="card-body" id="headings-container">
+                    
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6">
             <article>
                 <header class="mb-4">
                     <h1 class="fw-bolder mb-1">@Model.Title</h1>
                     <div class="text-muted fst-italic mb-2">پست شده در تاریخ <br />@Model.CreationTime.ToString("MMMM dd, yyyy") </div>
                     <div class="d-flex gap-2 mb-3">
-                        @foreach(var t in Model.Tags)
+                        @foreach (var t in Model.Tags)
                         {
-                            
-                        <span class="badge bg-secondary">@t?.Name</span>
-                       
+
+                            <span class="badge bg-secondary">@t?.Name</span>
+
                         }
                     </div>
                 </header>
 
-                <figure class="mb-4">
-                    <img class="img-fluid rounded" src="@Model.Image" alt="Article image">
-                </figure>
+
 
                 <section class="mb-5">
                     <p class="fs-5 mb-4">
-                        <div>
+                        <div id="H2Heading" >
                             @Html.Raw(Model.Content)
                         </div>
                     </p>
 
-                    
-                   
+
+
                 </section>
             </article>
 
-            
+
+        </div>
+        <div class="col-lg-3">
+            <div class="card mb-4">
+
+                <div class="card-body">
+                    <figure class="mb-4">
+                        <img class="img-fluid rounded" src="@Model.Image" alt="Article image">
+                    </figure>
+
+                </div>
+                <div class="card-footer">@Model.Title</div>
+            </div>
         </div>
 
-        <div class="col-lg-4">
-            <div class="card mb-4">
-                <div class="card-header">Related Articles</div>
-                <div class="card-body">
-                    <ul class="list-unstyled mb-0">
-                        <li><a href="#">Advanced Shooting Techniques</a></li>
-                        <li><a href="#">Foosball Rules Explained</a></li>
-                        <li><a href="#">Choosing the Right Table</a></li>
-                    </ul>
-                </div>
-            </div>
 
-            <div class="card mb-4">
-                <div class="card-header">Article Actions</div>
-                <div class="card-body">
-                    <div class="d-grid gap-2">
-                        <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning">Edit</a>
-                        <a asp-action="Index" class="btn btn-secondary">Back to List</a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="card">
-                <div class="card-header">Share This Article</div>
-                <div class="card-body">
-                    <div class="d-flex justify-content-around">
-                        <a href="#" class="btn btn-outline-primary"><i class="bi bi-telegram"></i></a>
-                        <a href="#" class="btn btn-outline-primary"><i class="bi bi-whatsapp"></i></a>
-                        <a href="#" class="btn btn-outline-primary"><i class="bi bi-twitter"></i></a>
-                        <a href="#" class="btn btn-outline-primary"><i class="bi bi-facebook"></i></a>
-                    </div>
-                </div>
-            </div>
-        </div>
     </div>
 </div>
 
 @section Styles {
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+}
+@section Scripts {
+    <script>
+        // Function to extract and display <h2> headings
+        function extractH2Headings() {
+            const contentDiv = document.getElementById('H2Heading');
+            const headingsContainer = document.getElementById('headings-container');
+
+            // Create a temporary div to parse the HTML content
+            const tempDiv = document.createElement('div');
+            tempDiv.innerHTML = contentDiv.innerHTML;
+
+            // Find all <h2> elements
+            const h2Elements = tempDiv.getElementsByTagName('h2');
+
+            // If no <h2> elements are found, display a message
+            if (h2Elements.length === 0) {
+                headingsContainer.innerHTML = '<p>هیچ عنوانی یافت نشد.</p>';
+                return;
+            }
+
+            // Loop through <h2> elements and append them to the container
+            for (let h2 of h2Elements) {
+                const headingText = h2.innerText.trim();
+                if (headingText) {
+                    const headingDiv = document.createElement('div');
+                    headingDiv.className = 'heading-item p-2 mb-2 border-bottom';
+                    headingDiv.innerText = headingText;
+                    headingsContainer.appendChild(headingDiv);
+                }
+            }
+        }
+
+        // Run the function when the page loads
+        document.addEventListener('DOMContentLoaded', extractH2Headings);
+    </script>
 }
