@@ -4,7 +4,7 @@
 }
 @model WikiDafoos.Models.ViewModel.HomeIndexViewModel
 <div class="hero-section landing-page bg-light p-5 mb-4 rounded-3">
-    <div class="container-fluid py-5 text-center">
+    <div class="container-fluid text-center landing-page-logo-wrapper">
 
         <!-- Optimized Responsive Image -->
         <img src="~/images/dafoos.svg"
@@ -16,7 +16,7 @@
         @* TODO :// COLOR *@
 
     </div>
-    <div class="row justify-content-center">
+    <div class="row justify-content-center search-box">
         <div class="col-12 col-lg-4 position-relative">
             <form class="d-flex" method="get" asp-controller="Search" asp-action="Search">
                 <div class="input-group">
