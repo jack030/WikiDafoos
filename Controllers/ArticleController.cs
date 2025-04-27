@@ -21,7 +21,7 @@ namespace WikiDafoos.Controllers
 
         public async Task<IActionResult> Index()
         {
-            var model = await _dafoosDbContext.Articles.Include(a => a.Category).ToListAsync();
+            var model = await _dafoosDbContext.Articles.Include(a => a.Category).Include(x=>x.Tags).ToListAsync();
             if (model.Count == 0)
             {
                 model = new List<Article>

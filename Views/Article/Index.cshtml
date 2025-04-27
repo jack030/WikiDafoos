@@ -1,86 +1,100 @@
-﻿
-
-@* @using WikiDafoos.Models; *@
+﻿@using System.Text.RegularExpressions
+@using System.Net
 @model List<WikiDafoos.Models.Article>
 
 
 
+@functions {
+    public static string GetPlainTextSummary(string htmlContent, int maxLength = 80)
+    {
+        if (string.IsNullOrEmpty(htmlContent))
+            return string.Empty;
+        var plainText = Regex.Replace(htmlContent, "<[^>]+>", " ");
+
+        plainText = WebUtility.HtmlDecode(plainText).Trim();
+
+        plainText = Regex.Replace(plainText, @"\s+", " ");
+
+        return plainText.Length <= maxLength
+            ? plainText + "..."
+            : plainText.Substring(0, maxLength) + "...";
+    }
+}
 
 
 <div class="container">
     <div class="d-flex justify-content-between align-items-center mb-4">
         <h1>فهرست مقالات</h1>
-        <a asp-action="Create" class="btn btn-success">Create New</a>
+        <a asp-action="Create" class="btn btn-success">ایجاد</a>
     </div>
 
     <div class="row mb-3">
         <div class="col-md-6">
             <form class="d-flex" role="search">
                 <input class="form-control me-2" type="search" placeholder="Search articles..." aria-label="Search">
-                <button class="btn btn-outline-success" type="submit">Search</button>
+                <button class="btn btn-outline-success" type="submit">جست‌و‌جو</button>
             </form>
         </div>
-        <div class="col-md-6">
-            <div class="dropdown float-end">
-                <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown">
-                    Sort By: Newest First
-                </button>
-                <ul class="dropdown-menu">
-                    <li><a class="dropdown-item" href="#">Newest First</a></li>
-                    <li><a class="dropdown-item" href="#">Oldest First</a></li>
-                    <li><a class="dropdown-item" href="#">Most Viewed</a></li>
-                    <li><a class="dropdown-item" href="#">Alphabetical</a></li>
-                </ul>
-            </div>
-        </div>
+
     </div>
 
     <div class="row row-cols-1 row-cols-md-2 g-4">
 
-           @if(@Model == null)
-          {
-          <div class="col">
-          <div class="card h-100">
-          <div class="card-body">
-
-          </div>
-          <div class="card-footer">
-          <small class="text-muted">Last updated 3 mins ago</small>
-          </div>
-          </div>
-          </div>
-          }
-        @* else{ *@
-      @*   @foreach (var item in Model)
+        @if (@Model == null)
         {
             <div class="col">
                 <div class="card h-100">
                     <div class="card-body">
-                        <h5 class="card-title">@Html.DisplayFor(modelItem => item.Title)</h5>
-                        <h6 class="card-subtitle mb-2 text-muted">@Html.DisplayFor(modelItem => item.CreationTime)</h6>
-                        <p class="card-text">@(item.Content.Length > 150 ? item.Content.Substring(0, 150) + "..." : item.Content)</p>
-                        <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-primary">Read More</a>
                     </div>
                     <div class="card-footer">
-                        <small class="text-muted">Last updated 3 mins ago</small>
+                        <small class="text-muted"></small>
                     </div>
                 </div>
             </div>
-        } *@
-        @* } *@
+        }
+        else
+
+            foreach (var item in Model)
+            {
+                <div class="col">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h5 class="card-title">@Html.DisplayFor(modelItem => item.Title)</h5>
+                            <h6 class="card-subtitle mb-2 text-muted">@Html.DisplayFor(modelItem => item.CreationTime)</h6>
+                            <div class="flex-shrink-0 me-3 align-content-lg-end" style="display:flex;gap:10px;">
+                                <img src="@item.Image"
+                                     class="img-thumbnail"
+                                     style="width: 100px; height: 100px; object-fit: cover;margin-left:10px,">
+                                <p class="card-text" style="margin-right:10px;">@GetPlainTextSummary(item.Content, 150)</p>
+                            </div>
+                            <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-primary" style="float:left">مطالعه</a>
+                        </div>
+                        <div class="card-footer">
+                            <small class="text-muted">
+
+                                @foreach (var t in item.Tags)
+                                {
+                                    <span class="badge bg-secondary">@t?.Name</span>
+                                }
+                            </small>
+                        </div>
+                    </div>
+                </div>
+            }
+
 
     </div>
 
     <nav aria-label="Page navigation" class="mt-4">
         <ul class="pagination justify-content-center">
             <li class="page-item disabled">
-                <a class="page-link">Previous</a>
+                <a class="page-link">قبل</a>
             </li>
             <li class="page-item active"><a class="page-link" href="#">1</a></li>
             <li class="page-item"><a class="page-link" href="#">2</a></li>
             <li class="page-item"><a class="page-link" href="#">3</a></li>
             <li class="page-item">
-                <a class="page-link" href="#">Next</a>
+                <a class="page-link" href="#">بعد</a>
             </li>
         </ul>
     </nav>
