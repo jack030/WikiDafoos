@@ -44,10 +44,7 @@ public class HomeController : Controller
         return View();
     }
 
-    //public IActionResult Articles()
-    //{
-    //    return View();
-    //}
+
     public IActionResult About()
     {
         ViewData["Title"] = "œ—»«—Â „«";

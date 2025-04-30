@@ -60,25 +60,18 @@ namespace WikiDafoos.Controllers
 
             try
             {
-                // Define the path to store images
                 var uploadsFolder = Path.Combine(_environment.WebRootPath, "Uploads");
                 if (!Directory.Exists(uploadsFolder))
                 {
                     Directory.CreateDirectory(uploadsFolder);
                 }
-
-                // Generate a unique file name
                 var fileName = Guid.NewGuid().ToString() + Path.GetExtension(upload.FileName);
                 var filePath = Path.Combine(uploadsFolder, fileName);
-
-                // Save the file
                 using (var stream = new FileStream(filePath, FileMode.Create))
                 {
                     await upload.CopyToAsync(stream);
                 }
 
-                // Return the URL of the uploaded image
-                //var fileUrl = $"{Request.Scheme}://{Request.Host}/Uploads/{fileName}";
                 var fileUrl = $"/Uploads/{fileName}";
 
                 var result = new JsonResult(new { url = fileUrl, uploaded = true })
@@ -90,7 +83,6 @@ namespace WikiDafoos.Controllers
             }
             catch (Exception ex)
             {
-                // Log the error for debugging
                 Console.WriteLine($"Upload error: {ex.Message}");
                 return Json(new { error = new { message = $"Server error: {ex.Message}" } });
             }
